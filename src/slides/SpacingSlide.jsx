@@ -1,8 +1,10 @@
 import { useState } from 'react'
 import Slider from '../components/Slider'
+import ToggleGroup from '../components/ToggleGroup'
 import DemoCard from '../components/DemoCard'
+import DiagnosticCallout from '../components/DiagnosticCallout'
 
-// Map numeric values to Tailwind classes - EXTREME ranges for dramatic effect
+// Map numeric values to Tailwind classes
 const lineHeightMap = {
   1.0: 'leading-none',
   1.1: 'leading-tight',
@@ -36,6 +38,14 @@ const paddingMap = {
   64: 'p-16',
 }
 
+// Density presets - these set the slider values
+const densityPresets = {
+  cramped: { lineHeight: 1.1, gap: 4, padding: 12 },
+  compact: { lineHeight: 1.25, gap: 12, padding: 20 },
+  comfortable: { lineHeight: 1.5, gap: 24, padding: 32 },
+  spacious: { lineHeight: 1.75, gap: 40, padding: 48 },
+}
+
 function getClosestKey(value, map) {
   const keys = Object.keys(map).map(Number)
   return keys.reduce((prev, curr) =>
@@ -45,8 +55,23 @@ function getClosestKey(value, map) {
 
 export default function SpacingSlide() {
   const [lineHeight, setLineHeight] = useState(1.5)
-  const [gap, setGap] = useState(16)
+  const [gap, setGap] = useState(24)
   const [padding, setPadding] = useState(32)
+
+  // Apply a density preset
+  const applyPreset = (presetName) => {
+    const preset = densityPresets[presetName]
+    setLineHeight(preset.lineHeight)
+    setGap(preset.gap)
+    setPadding(preset.padding)
+  }
+
+  // Determine which preset is currently active (if any)
+  const currentPreset = Object.entries(densityPresets).find(([_, preset]) =>
+    preset.lineHeight === lineHeight &&
+    preset.gap === gap &&
+    preset.padding === padding
+  )?.[0] || null
 
   const styles = {
     lineHeight: lineHeightMap[getClosestKey(lineHeight, lineHeightMap)],
@@ -55,20 +80,36 @@ export default function SpacingSlide() {
   }
 
   return (
-    <div className="flex flex-col items-center gap-8">
+    <div className="flex flex-col items-center gap-5">
       <div className="text-center">
         <h2 className="text-3xl font-bold text-slate-900 mb-2">Spacing</h2>
-        <p className="text-slate-600">Spacing is a system with multiple levers.</p>
+        <p className="text-slate-600">Breathing room affects readability and feel.</p>
       </div>
 
+      <DiagnosticCallout quote="If the UI feels cramped or exhausting, spacing—not features—is usually the problem." />
+
+      {/* Density presets */}
+      <ToggleGroup
+        label="Density Preset"
+        options={[
+          { value: 'cramped', label: 'Cramped' },
+          { value: 'compact', label: 'Compact' },
+          { value: 'comfortable', label: 'Comfortable' },
+          { value: 'spacious', label: 'Spacious' },
+        ]}
+        value={currentPreset}
+        onChange={applyPreset}
+      />
+
+      {/* Fine-tune sliders */}
       <div className="flex gap-8 flex-wrap justify-center">
         <Slider
           label="Line Height"
           value={lineHeight}
           onChange={setLineHeight}
           min={1.0}
-          max={2.5}
-          step={0.1}
+          max={2.0}
+          step={0.05}
         />
         <Slider
           label="Element Gap"
@@ -76,14 +117,14 @@ export default function SpacingSlide() {
           onChange={setGap}
           min={0}
           max={64}
-          step={2}
+          step={4}
           unit="px"
         />
         <Slider
           label="Padding"
           value={padding}
           onChange={setPadding}
-          min={4}
+          min={8}
           max={64}
           step={4}
           unit="px"

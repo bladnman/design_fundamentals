@@ -14,12 +14,16 @@ export default function DemoCard({ styles = {} }) {
     secondaryButtonBg = 'bg-slate-200',
     secondaryButtonText = 'text-slate-700',
 
-    // Typography
+    // Typography sizes
     headlineSize = 'text-3xl',
     subheadSize = 'text-lg',
     bodySize = 'text-base',
     statSize = 'text-2xl',
     titleSize = 'text-xs',
+
+    // Typography weights (for hierarchy demo)
+    headlineWeight = 'font-semibold',
+    statWeight = 'font-bold',
 
     // Font families
     titleFont = 'font-body',
@@ -66,7 +70,7 @@ export default function DemoCard({ styles = {} }) {
       <div className={`flex flex-col ${gap} demo-transition`}>
         {/* Headline + Subheadline */}
         <div>
-          <h2 className={`${headlineSize} font-semibold ${headlineFont} demo-transition`}>
+          <h2 className={`${headlineSize} ${headlineWeight} ${headlineFont} demo-transition`}>
             Welcome back, Sarah
           </h2>
           <p className={`${subheadSize} ${subtextColor} ${subheadFont} mt-1 demo-transition`}>
@@ -84,7 +88,7 @@ export default function DemoCard({ styles = {} }) {
                 rounded-xl p-4 text-center demo-transition
               `}
             >
-              <div className={`${statSize} ${statFont} font-bold ${textColor} demo-transition`}>
+              <div className={`${statSize} ${statFont} ${statWeight} ${textColor} demo-transition`}>
                 {stat.value}
               </div>
               <div className={`${titleSize} ${statLabelFont} ${subtextColor} font-medium uppercase tracking-wide demo-transition`}>

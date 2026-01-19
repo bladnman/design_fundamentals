@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import ToggleGroup from '../components/ToggleGroup'
 import DemoCard from '../components/DemoCard'
+import DiagnosticCallout from '../components/DiagnosticCallout'
 
 const fontModes = {
   normal: {
@@ -67,11 +68,13 @@ export default function FontsSlide() {
   const desc = fontDescriptions[mode]
 
   return (
-    <div className="flex flex-col items-center gap-5">
+    <div className="flex flex-col items-center gap-4">
       <div className="text-center max-w-xl">
         <h2 className="text-3xl font-bold text-slate-900 mb-2">Fonts are Personality</h2>
         <p className="text-slate-600">Headlines can be expressive. Body text needs to be readable.</p>
       </div>
+
+      <DiagnosticCallout quote="If your app could be mistaken for any other app, typography is often why." />
 
       <ToggleGroup
         options={[
@@ -88,7 +91,7 @@ export default function FontsSlide() {
         <div className="text-center">
           <div className="text-slate-400 uppercase tracking-wide text-xs mb-1">Fonts Used</div>
           <div className="flex flex-wrap gap-1 justify-center max-w-48">
-            {desc.fonts.map((font, i) => (
+            {desc.fonts.map((font) => (
               <span
                 key={font}
                 className={`
