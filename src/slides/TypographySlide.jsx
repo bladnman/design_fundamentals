@@ -1,8 +1,9 @@
 import { useState } from 'react'
 import ToggleGroup from '../components/ToggleGroup'
-import Slider from '../components/Slider'
+import CompactSlider from '../components/CompactSlider'
 import DemoCard from '../components/DemoCard'
 import DiagnosticCallout from '../components/DiagnosticCallout'
+import SlideExplanation from '../components/SlideExplanation'
 
 // Scale types define how sizes relate to each other
 const scaleTypes = {
@@ -89,6 +90,11 @@ export default function TypographySlide() {
         <p className="text-slate-600">Size relationships create hierarchy and rhythm.</p>
       </div>
 
+      <SlideExplanation>
+        A consistent type scale provides visual landmarks. When sizes are arbitrary, the interface
+        loses rhythm and users can't quickly distinguish headings from labels from body text.
+      </SlideExplanation>
+
       <DiagnosticCallout quote="If your text feels noisy or dull, your font choices are probably doing too much—or nothing at all." />
 
       <div className="flex gap-6 flex-wrap justify-center items-end">
@@ -103,7 +109,7 @@ export default function TypographySlide() {
           onChange={setScaleType}
         />
 
-        <Slider
+        <CompactSlider
           label="Base Size"
           value={baseSize}
           onChange={setBaseSize}
@@ -113,7 +119,7 @@ export default function TypographySlide() {
           unit="px"
         />
 
-        <Slider
+        <CompactSlider
           label="Scale Ratio"
           value={scaleRatio}
           onChange={setScaleRatio}

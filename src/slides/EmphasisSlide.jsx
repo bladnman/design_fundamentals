@@ -1,8 +1,9 @@
 import { useState } from 'react'
 import ToggleGroup from '../components/ToggleGroup'
-import Slider from '../components/Slider'
+import CompactSlider from '../components/CompactSlider'
 import DemoCard from '../components/DemoCard'
 import DiagnosticCallout from '../components/DiagnosticCallout'
+import SlideExplanation from '../components/SlideExplanation'
 
 // What element gets the emphasis
 const emphasisTargets = {
@@ -71,7 +72,7 @@ const emphasisStrengthMap = {
   },
 }
 
-// How muted are non-emphasized elements - more dramatic range
+// How muted are non-emphasized elements
 const deEmphasisMap = {
   1: {
     subtextColor: 'text-slate-700',
@@ -103,40 +104,15 @@ const deEmphasisMap = {
   },
 }
 
-// Emphasis technique variations
-const emphasisTechniques = {
-  size: {
-    stats: { statSize: 'text-4xl' },
-    cta: { /* button already gets attention via shadow */ },
-    headline: { headlineSize: 'text-5xl' },
-    nothing: {},
-  },
-  color: {
-    stats: { cardBg: 'bg-amber-100', cardBorder: 'border-amber-300' },
-    cta: { buttonBg: 'bg-amber-500', buttonText: 'text-white' },
-    headline: { textColor: 'text-amber-900' },
-    nothing: {},
-  },
-  position: {
-    // Position emphasis is more about layout - using shadow/border as proxy
-    stats: { statShadow: 'shadow-xl', cardBg: 'bg-white' },
-    cta: { buttonShadow: 'shadow-2xl' },
-    headline: { cardShadow: 'shadow-inner' },
-    nothing: {},
-  },
-}
-
 export default function EmphasisSlide() {
   const [target, setTarget] = useState('cta')
   const [strength, setStrength] = useState(3)
   const [deEmphasis, setDeEmphasis] = useState(3)
-  const [technique, setTechnique] = useState('size')
 
   const baseStyles = {
     ...emphasisTargets[target],
     ...emphasisStrengthMap[target][strength],
     ...deEmphasisMap[deEmphasis],
-    ...emphasisTechniques[technique]?.[target],
   }
 
   return (
@@ -145,6 +121,11 @@ export default function EmphasisSlide() {
         <h2 className="text-3xl font-bold text-slate-900 mb-2">Emphasis</h2>
         <p className="text-slate-600">Draw attention to what matters most.</p>
       </div>
+
+      <SlideExplanation>
+        Emphasis is the technique for drawing attention—size, color, or position. Once you know
+        what's most important (Hierarchy), emphasis determines how loudly you say it.
+      </SlideExplanation>
 
       <DiagnosticCallout quote="If users hesitate, it's often because too many things are competing for attention." />
 
@@ -161,8 +142,8 @@ export default function EmphasisSlide() {
           onChange={setTarget}
         />
 
-        <Slider
-          label="Emphasis Strength"
+        <CompactSlider
+          label="Strength"
           value={strength}
           onChange={setStrength}
           min={1}
@@ -170,24 +151,13 @@ export default function EmphasisSlide() {
           step={1}
         />
 
-        <Slider
+        <CompactSlider
           label="De-emphasis"
           value={deEmphasis}
           onChange={setDeEmphasis}
           min={1}
           max={5}
           step={1}
-        />
-
-        <ToggleGroup
-          label="Technique"
-          options={[
-            { value: 'size', label: 'Size' },
-            { value: 'color', label: 'Color' },
-            { value: 'position', label: 'Position' },
-          ]}
-          value={technique}
-          onChange={setTechnique}
         />
       </div>
 

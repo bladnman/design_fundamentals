@@ -1,8 +1,9 @@
 import { useState } from 'react'
 import ToggleGroup from '../components/ToggleGroup'
-import Slider from '../components/Slider'
+import CompactSlider from '../components/CompactSlider'
 import DemoCard from '../components/DemoCard'
 import DiagnosticCallout from '../components/DiagnosticCallout'
+import SlideExplanation from '../components/SlideExplanation'
 
 // Base clean styles
 const cleanStyles = {
@@ -33,14 +34,6 @@ const gradientStyles = {
 
 const shadowEverywhereStyles = {
   on: { cardShadow: 'shadow-2xl', statShadow: 'shadow-lg', buttonShadow: 'shadow-lg' },
-  off: {},
-}
-
-const iconDecorationStyles = {
-  on: { /* Would add icon indicators - simulated via extra styling */
-    titleSize: 'text-sm',
-    mutedColor: 'text-blue-500',
-  },
   off: {},
 }
 
@@ -95,7 +88,6 @@ export default function RestraintSlide() {
   const [extraBorder, setExtraBorder] = useState(false)
   const [gradient, setGradient] = useState(false)
   const [shadowsEverywhere, setShadowsEverywhere] = useState(false)
-  const [iconDecorations, setIconDecorations] = useState(false)
   const [complexity, setComplexity] = useState(3)
 
   // Build styles based on toggles or complexity slider
@@ -105,11 +97,10 @@ export default function RestraintSlide() {
     ...(extraBorder ? extraBorderStyles.on : {}),
     ...(gradient ? gradientStyles.on : {}),
     ...(shadowsEverywhere ? shadowEverywhereStyles.on : {}),
-    ...(iconDecorations ? iconDecorationStyles.on : {}),
   }
 
-  const anyToggleOn = extraBorder || gradient || shadowsEverywhere || iconDecorations
-  const toggleCount = [extraBorder, gradient, shadowsEverywhere, iconDecorations].filter(Boolean).length
+  const anyToggleOn = extraBorder || gradient || shadowsEverywhere
+  const toggleCount = [extraBorder, gradient, shadowsEverywhere].filter(Boolean).length
 
   return (
     <div className="flex flex-col items-center gap-5">
@@ -118,10 +109,15 @@ export default function RestraintSlide() {
         <p className="text-slate-600">Less is often more. Complexity should be earned.</p>
       </div>
 
+      <SlideExplanation>
+        Every visual treatment costs cognitive budget. Adding more rarely solves problems—it
+        usually creates them. Ask if each element earns its place.
+      </SlideExplanation>
+
       <DiagnosticCallout quote="If you keep adding things to fix clarity, you probably need to remove something instead." />
 
       <div className="flex gap-6 flex-wrap justify-center items-end">
-        <Slider
+        <CompactSlider
           label="Complexity"
           value={complexity}
           onChange={setComplexity}

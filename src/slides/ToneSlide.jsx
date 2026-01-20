@@ -1,8 +1,9 @@
 import { useState } from 'react'
 import ToggleGroup from '../components/ToggleGroup'
-import Slider from '../components/Slider'
+import CompactSlider from '../components/CompactSlider'
 import DemoCard from '../components/DemoCard'
 import DiagnosticCallout from '../components/DiagnosticCallout'
+import SlideExplanation from '../components/SlideExplanation'
 
 // Base themes focused on tonal mood
 const themes = {
@@ -129,6 +130,11 @@ export default function ToneSlide() {
         <p className="text-slate-600">Mood comes from lightness, temperature, and saturation.</p>
       </div>
 
+      <SlideExplanation>
+        Tone establishes emotional foundation. A warm, soft palette feels approachable; cool and
+        dark feels technical. Getting tone wrong makes users feel the product wasn't made for them.
+      </SlideExplanation>
+
       <DiagnosticCallout quote="If everything feels equally loud or equally flat, you probably haven't chosen a tone." />
 
       <div className="flex gap-8 flex-wrap justify-center items-end">
@@ -153,7 +159,7 @@ export default function ToneSlide() {
           onChange={setTemperature}
         />
 
-        <Slider
+        <CompactSlider
           label="Saturation"
           value={saturation}
           onChange={setSaturation}

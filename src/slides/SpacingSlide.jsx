@@ -1,8 +1,9 @@
 import { useState } from 'react'
-import Slider from '../components/Slider'
 import ToggleGroup from '../components/ToggleGroup'
+import CompactSlider from '../components/CompactSlider'
 import DemoCard from '../components/DemoCard'
 import DiagnosticCallout from '../components/DiagnosticCallout'
+import SlideExplanation from '../components/SlideExplanation'
 
 // Map numeric values to Tailwind classes
 const lineHeightMap = {
@@ -86,6 +87,12 @@ export default function SpacingSlide() {
         <p className="text-slate-600">Breathing room affects readability and feel.</p>
       </div>
 
+      <SlideExplanation>
+        Spacing controls density and visual comfort. Too tight feels overwhelming; too loose feels
+        wasteful. Consistent spacing also creates relationships—elements that belong together should
+        be spaced together.
+      </SlideExplanation>
+
       <DiagnosticCallout quote="If the UI feels cramped or exhausting, spacing—not features—is usually the problem." />
 
       {/* Density presets */}
@@ -101,9 +108,9 @@ export default function SpacingSlide() {
         onChange={applyPreset}
       />
 
-      {/* Fine-tune sliders */}
-      <div className="flex gap-8 flex-wrap justify-center">
-        <Slider
+      {/* Compact sliders in a row */}
+      <div className="flex gap-6 flex-wrap justify-center">
+        <CompactSlider
           label="Line Height"
           value={lineHeight}
           onChange={setLineHeight}
@@ -111,7 +118,7 @@ export default function SpacingSlide() {
           max={2.0}
           step={0.05}
         />
-        <Slider
+        <CompactSlider
           label="Element Gap"
           value={gap}
           onChange={setGap}
@@ -120,7 +127,7 @@ export default function SpacingSlide() {
           step={4}
           unit="px"
         />
-        <Slider
+        <CompactSlider
           label="Padding"
           value={padding}
           onChange={setPadding}

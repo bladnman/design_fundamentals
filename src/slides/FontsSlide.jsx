@@ -2,6 +2,7 @@ import { useState } from 'react'
 import ToggleGroup from '../components/ToggleGroup'
 import DemoCard from '../components/DemoCard'
 import DiagnosticCallout from '../components/DiagnosticCallout'
+import SlideExplanation from '../components/SlideExplanation'
 
 const fontModes = {
   normal: {
@@ -73,6 +74,11 @@ export default function FontsSlide() {
         <h2 className="text-3xl font-bold text-slate-900 mb-2">Fonts are Personality</h2>
         <p className="text-slate-600">Headlines can be expressive. Body text needs to be readable.</p>
       </div>
+
+      <SlideExplanation>
+        Fonts communicate personality before users read a word. Serif feels traditional; geometric
+        sans feels modern. Mix fonts intentionally to create contrast between display and body.
+      </SlideExplanation>
 
       <DiagnosticCallout quote="If your app could be mistaken for any other app, typography is often why." />
 

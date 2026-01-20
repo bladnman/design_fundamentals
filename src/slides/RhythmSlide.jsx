@@ -1,20 +1,19 @@
 import { useState } from 'react'
 import ToggleGroup from '../components/ToggleGroup'
-import Slider from '../components/Slider'
 import SequenceDemo from '../components/SequenceDemo'
 import DiagnosticCallout from '../components/DiagnosticCallout'
+import SlideExplanation from '../components/SlideExplanation'
 
 export default function RhythmSlide() {
   const [spacingRhythm, setSpacingRhythm] = useState('uniform')
   const [sizePattern, setSizePattern] = useState('uniform')
   const [connectorStyle, setConnectorStyle] = useState('line')
-  const [stepCount, setStepCount] = useState(4)
 
   const styles = {
     spacingRhythm,
     sizePattern,
     connectorStyle,
-    stepCount,
+    stepCount: 4, // Fixed at 4 to focus on rhythm lesson
   }
 
   return (
@@ -23,6 +22,11 @@ export default function RhythmSlide() {
         <h2 className="text-3xl font-bold text-slate-900 mb-2">Rhythm</h2>
         <p className="text-slate-600">Patterns in space and size guide users through sequences.</p>
       </div>
+
+      <SlideExplanation>
+        Rhythm creates patterns that guide users through sequences. Random spacing or sizing
+        breaks the flow, making users feel lost between steps.
+      </SlideExplanation>
 
       <DiagnosticCallout quote="If users feel lost between steps, the rhythm of the layout isn't guiding them." />
 
@@ -59,15 +63,6 @@ export default function RhythmSlide() {
           ]}
           value={connectorStyle}
           onChange={setConnectorStyle}
-        />
-
-        <Slider
-          label="Step Count"
-          value={stepCount}
-          onChange={setStepCount}
-          min={3}
-          max={6}
-          step={1}
         />
       </div>
 

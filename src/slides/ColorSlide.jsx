@@ -1,8 +1,9 @@
 import { useState } from 'react'
 import ToggleGroup from '../components/ToggleGroup'
-import Slider from '../components/Slider'
+import CompactSlider from '../components/CompactSlider'
 import DemoCard from '../components/DemoCard'
 import DiagnosticCallout from '../components/DiagnosticCallout'
+import SlideExplanation from '../components/SlideExplanation'
 
 // Color harmony approaches - this is about relationships between colors
 const colorHarmonies = {
@@ -102,6 +103,11 @@ export default function ColorSlide() {
         <p className="text-slate-600">Color harmony creates visual relationships.</p>
       </div>
 
+      <SlideExplanation>
+        Color harmonies (monochromatic, complementary, analogous) create palettes that feel
+        intentional. The right harmony reinforces personality while ensuring readability.
+      </SlideExplanation>
+
       <DiagnosticCallout quote="If your colors clash or feel random, the problem is usually how they were chosen—not which ones." />
 
       <div className="flex gap-6 flex-wrap justify-center items-end">
@@ -117,8 +123,8 @@ export default function ColorSlide() {
           onChange={setHarmony}
         />
 
-        <Slider
-          label="Accent Prominence"
+        <CompactSlider
+          label="Accent"
           value={accentProminence}
           onChange={setAccentProminence}
           min={1}
@@ -126,7 +132,7 @@ export default function ColorSlide() {
           step={1}
         />
 
-        <Slider
+        <CompactSlider
           label="Colorfulness"
           value={colorfulness}
           onChange={setColorfulness}

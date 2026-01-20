@@ -1,8 +1,9 @@
 import { useState } from 'react'
 import ToggleGroup from '../components/ToggleGroup'
-import Slider from '../components/Slider'
+import CompactSlider from '../components/CompactSlider'
 import DemoCard from '../components/DemoCard'
 import DiagnosticCallout from '../components/DiagnosticCallout'
+import SlideExplanation from '../components/SlideExplanation'
 
 export default function ElevationSlide() {
   const [cardElevation, setCardElevation] = useState(3)
@@ -109,35 +110,42 @@ export default function ElevationSlide() {
         <p className="text-slate-600">What pops forward? What recedes?</p>
       </div>
 
+      <SlideExplanation>
+        Shadows create depth. Modals should float above; grounded content should feel stable.
+        Without elevation cues, overlapping elements confuse users about what's interactive.
+      </SlideExplanation>
+
       <DiagnosticCallout quote="If modals, menus, and highlights don't feel obvious, depth is missing." />
 
       <div className="flex gap-6 flex-wrap justify-center items-end">
-        <Slider
-          label="Card"
-          value={cardElevation}
-          onChange={setCardElevation}
-          min={1}
-          max={5}
-          step={1}
-        />
+        <div className="flex gap-4">
+          <CompactSlider
+            label="Card"
+            value={cardElevation}
+            onChange={setCardElevation}
+            min={1}
+            max={5}
+            step={1}
+          />
 
-        <Slider
-          label="Stats"
-          value={statsElevation}
-          onChange={setStatsElevation}
-          min={1}
-          max={5}
-          step={1}
-        />
+          <CompactSlider
+            label="Stats"
+            value={statsElevation}
+            onChange={setStatsElevation}
+            min={1}
+            max={5}
+            step={1}
+          />
 
-        <Slider
-          label="Button"
-          value={buttonElevation}
-          onChange={setButtonElevation}
-          min={1}
-          max={5}
-          step={1}
-        />
+          <CompactSlider
+            label="Button"
+            value={buttonElevation}
+            onChange={setButtonElevation}
+            min={1}
+            max={5}
+            step={1}
+          />
+        </div>
 
         <ToggleGroup
           label="Style"

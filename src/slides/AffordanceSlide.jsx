@@ -1,8 +1,9 @@
 import { useState } from 'react'
 import ToggleGroup from '../components/ToggleGroup'
-import Slider from '../components/Slider'
+import CompactSlider from '../components/CompactSlider'
 import InteractiveElementsDemo from '../components/InteractiveElementsDemo'
 import DiagnosticCallout from '../components/DiagnosticCallout'
+import SlideExplanation from '../components/SlideExplanation'
 
 export default function AffordanceSlide() {
   const [buttonDepth, setButtonDepth] = useState(3)
@@ -24,11 +25,16 @@ export default function AffordanceSlide() {
         <p className="text-slate-600">Visual cues that communicate interactivity.</p>
       </div>
 
+      <SlideExplanation>
+        Affordance is the visual promise of interactivity. Flat designs often sacrifice these
+        cues for aesthetics, leaving users unsure what's clickable.
+      </SlideExplanation>
+
       <DiagnosticCallout quote="If users don't know what they can interact with, affordance is broken." />
 
       <div className="flex gap-6 flex-wrap justify-center items-end">
-        <Slider
-          label="Button Depth"
+        <CompactSlider
+          label="Btn Depth"
           value={buttonDepth}
           onChange={setButtonDepth}
           min={1}
@@ -46,7 +52,7 @@ export default function AffordanceSlide() {
           onChange={setShowHoverStates}
         />
 
-        <Slider
+        <CompactSlider
           label="Input Borders"
           value={inputBorderStrength}
           onChange={setInputBorderStrength}
